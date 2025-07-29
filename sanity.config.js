@@ -13,12 +13,26 @@ import {apiVersion, dataset, projectId} from './sanity/env'
 import {schema} from './sanity/schemaTypes'
 import {structure} from './sanity/structure'
 
+import product from './sanity/schemas/product'
+import category from './sanity/schemas/category'
+import productType from './sanity/schemas/productType'
+import material from './sanity/schemas/material'
+import productVariant from './sanity/schemas/productVariant'
+
 export default defineConfig({
   basePath: '/admin',
   projectId,
   dataset,
   // Add and edit the content schema in the './sanity/schemaTypes' folder
-  schema,
+  schema: {
+    types: [
+      product,
+      category,
+      productType,
+      material,
+      productVariant,
+    ],
+  },
   plugins: [
     structureTool({structure}),
     // Vision is for querying with GROQ from inside the Studio
