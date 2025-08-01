@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 const images = [
   "/images/1.jpeg",
@@ -54,18 +55,12 @@ export default function HeroSection() {
           retail markups or showroom delays.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <a
-            href="#contact"
+          <Link
+            href="/contact"
             className="rounded-lg bg-white px-6 py-3 font-semibold text-gray-900 transition hover:bg-gray-200"
           >
             Get a Quote
-          </a>
-          <a
-            href="#projects"
-            className="rounded-lg bg-gray-900 px-6 py-3 font-semibold text-white transition hover:bg-gray-700"
-          >
-            View Workspace Projects
-          </a>
+          </Link>
         </div>
       </div>
     </section>
