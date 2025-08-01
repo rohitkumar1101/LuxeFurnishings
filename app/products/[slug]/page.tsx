@@ -9,8 +9,9 @@ import { PortableText } from "@portabletext/react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { urlForImage } from "@/sanity/lib/image";
+import Link from "next/link";
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: any): Promise<Metadata> {
   const product = await client.fetch<{ title: string }>(
     `*[_type == "product" && slug.current == $slug][0]{ title }`,
     { slug: params.slug }
@@ -22,9 +23,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 export default async function ProductDetailPage({
   params,
-}: {
-  params: { slug: string };
-}) {
+}: any) {
   const { slug } = params;
 
   const query = `*[_type == "product" && slug.current == $slug][0]{
@@ -48,9 +47,9 @@ export default async function ProductDetailPage({
     <main className="mx-auto max-w-5xl px-4 py-12">
       {/* Title & breadcrumbs */}
       <nav className="mb-4 text-sm text-gray-500">
-        <a href="/products" className="hover:underline">
+        <Link href="/products" className="hover:underline">
           Products
-        </a>
+        </Link>
         {product.categories?.map((cat: any) => (
           <span key={cat.slug.current}>
             {" / "}

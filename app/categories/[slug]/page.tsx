@@ -1,32 +1,27 @@
-// app/categories/[slug]/page.tsx
-// -----------------------------------------------------------------------------
-// Category detail page.  NOTE:  fixed the GROQ query that blew up with the
-// “string literal expected” error – the culprit was a missing space before the
-// pipeline (  ] | order()  ← needs the space).  The query below is now valid.
-// -----------------------------------------------------------------------------
-
-import Image from "next/image";
-import Link from "next/link";
-import { client } from "@/sanity/lib/client";
-import { urlForImage } from "@/sanity/lib/image";
 import { Metadata } from "next";
+import Image  from "next/image";
+import Link   from "next/link";
 import { notFound } from "next/navigation";
+import { client }   from "@/sanity/lib/client";
+import { urlForImage } from "@/sanity/lib/image";
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const category = await client.fetch<{ title: string }>(
-    `*[_type == "category" && slug.current == $slug][0]{ title }`,
-    { slug: params.slug }
-  );
+/* ---------- 1. Metadata ---------- */
+export async function generateMetadata(
+  { params }: any
+): Promise<Metadata> {
+  const { title } =
+    (await client.fetch<{ title: string }>(
+      `*[_type=="category" && slug.current==$slug][0]{title}`,
+      { slug: params.slug }
+    )) ?? {};
 
-  return category
-    ? {
-        title: `${category.title} | Products | ILF`,
-        description: `Browse all products in the ${category.title} category`,
-      }
-    : {};
+  return {
+    title: title ? `${title} | Products | ILF` : "Category | ILF",
+    description: title && `Browse all products in the ${title} category.`,
+  };
 }
 
-export default async function CategoryPage({ params }: { params: { slug: string } }) {
+export default async function CategoryPage({ params }: any) {
   const { slug } = params;
 
   /*
