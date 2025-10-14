@@ -1,28 +1,21 @@
 "use client";
-// components/Navbar.tsx (optimised)
-// -----------------------------------------------------------------------------
-// • Single source-of-truth for nav links (map ⇒ no duplication)
-// • Memoised callbacks to avoid re-renders
-// • ARIA-friendly toggle with esc-to-close & focus retention reset
-// • Tailwind classes extracted into variables for readability
-// • Same visual design; zero external deps beyond lucide-react
-// -----------------------------------------------------------------------------
 
 import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 
 const NAV_LINKS = [
-  { href: "/products",   label: "Products"   },
+  { href: "/about", label: "About" },
   { href: "/categories", label: "Categories" },
-  { href: "/contact",    label: "Contact Us" },
+  { href: "/contact", label: "Contact Us" },
 ] as const;
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   const toggle = useCallback(() => setOpen((prev) => !prev), []);
-  const close  = useCallback(() => setOpen(false), []);
+  const close = useCallback(() => setOpen(false), []);
 
   // 📦  Close on Esc when mobile menu is open
   useEffect(() => {
@@ -41,8 +34,16 @@ export default function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:py-4">
         {/* Brand */}
-        <Link href="/" className="text-xl font-bold text-gray-900" onClick={close}>
-          Infinity Luxe Furnishings
+        <Link href="/" className="flex items-center gap-2 text-xl font-bold text-gray-900" onClick={close}>
+          <Image
+            src="/images/logo.png"
+            alt="Infinity Luxe Furnishings logo"
+            width={60}
+            height={60}
+            className="mr-2 rounded-sm object-contain"
+            priority
+          />
+          <span className="leading-none">Infinity Luxe Furnishings</span>
         </Link>
 
         {/* Desktop links */}

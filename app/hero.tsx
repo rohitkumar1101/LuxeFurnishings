@@ -47,19 +47,19 @@ export default function HeroSection() {
       {/* Copy + CTAs */}
       <div className="relative z-10 flex h-full w-full flex-col items-center justify-center px-6 text-center text-white">
         <h1 className="mb-4 text-3xl font-bold md:text-5xl">
-          Premium Office Furniture Manufacturer in Bangalore
+          Luxury Furniture. Factory-Made. Delivered On Time
         </h1>
         <p className="mb-8 max-w-2xl text-lg md:text-2xl">
-          From co‑working spaces to PGs, ILF is a trusted B2B furniture supplier
-          delivering factory‑direct, custom office furniture on time — without
-          retail markups or showroom delays.
+          High end comfort & factory direct prices for your homes and offices.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <Link
-            href="/contact"
-            className="rounded-lg bg-white px-6 py-3 font-semibold text-gray-900 transition hover:bg-gray-200"
+            href="/categories"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#B8892D] to-[#E4C86E]
+px-8 py-2 text-lg font-semibold text-white shadow-lg transition
+hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70"
           >
-            Get a Quote
+            Explore
           </Link>
         </div>
       </div>

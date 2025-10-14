@@ -4,9 +4,9 @@ import { useRef, useState, FormEvent } from "react";
 import emailjs from "@emailjs/browser";
 import { toast } from "react-hot-toast";
 
-const SERVICE_ID  = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
 const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
-const PUBLIC_KEY  = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
+const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
 
 export default function ContactSection() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -42,8 +42,8 @@ export default function ContactSection() {
     "focus:ring-2 focus:ring-indigo-400 placeholder-transparent";
 
   return (
-    <section id="contact" className="relative bg-gray-50 pt-24 pb-32 px-4 sm:px-6 lg:px-8">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-indigo-600/20 to-transparent" />
+    <section id="contact" className="relative bg-gray-50 pt-20 pb-20 px-4 sm:px-6 lg:px-8">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-64" />
 
       <div className="relative mx-auto w-full max-w-5xl">
         <h2 className="mb-12 text-center text-4xl font-extrabold tracking-tight text-gray-900 md:text-5xl">
@@ -120,7 +120,10 @@ export default function ContactSection() {
             <button
               type="submit"
               disabled={sending}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-sky-600 px-8 py-2 text-lg font-semibold text-white shadow-lg transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70"
+              className="inline-flex items-center justify-center gap-2 rounded-xl
+bg-gradient-to-r from-[#B8892D] to-[#E4C86E]
+px-8 py-2 text-lg font-semibold text-white shadow-lg transition
+hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70"
             >
               {sending ? "Sending…" : "Send Message"}
             </button>

@@ -42,7 +42,10 @@ export default async function CategoriesPage() {
       {categories.length === 0 ? (
         <p className="text-center text-gray-500">No categories found.</p>
       ) : (
-        <ul className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
+        <ul className="
+    grid justify-center gap-6
+    [grid-template-columns:repeat(auto-fit,minmax(260px,260px))]
+  ">
           {categories.map((cat) => (
             <li key={cat._id}>
               <Link href={`/categories/${cat.slug.current}`} prefetch={false}>

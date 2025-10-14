@@ -47,13 +47,13 @@ export default async function ProductDetailPage({
     <main className="mx-auto max-w-5xl px-4 py-12">
       {/* Title & breadcrumbs */}
       <nav className="mb-4 text-sm text-gray-500">
-        <Link href="/products" className="hover:underline">
-          Products
+        <Link href="/categories" className="hover:underline">
+          Categories
         </Link>
         {product.categories?.map((cat: any) => (
           <span key={cat.slug.current}>
             {" / "}
-            <a href={`/products?category=${cat.slug.current}`} className="hover:underline">
+            <a href={`/categories/${cat.slug.current}`} className="hover:underline">
               {cat.title}
             </a>
           </span>
