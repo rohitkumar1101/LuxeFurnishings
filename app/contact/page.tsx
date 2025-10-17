@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, FormEvent } from "react";
+import { useRef, useState, FormEvent, useCallback } from "react";
 import emailjs from "@emailjs/browser";
 import { toast } from "react-hot-toast";
 
@@ -22,7 +22,7 @@ export default function ContactSection() {
         emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY),
         {
           loading: "Sending…",
-          success: "Message sent! We'll be in touch within 24 h ✉️",
+          success: "Message sent! We'll be in touch within the hour ✉️",
           error: "Oops – something went wrong. Please try again later.",
         }
       )
@@ -30,30 +30,46 @@ export default function ContactSection() {
       .finally(() => setSending(false));
   };
 
+  /** On focus, set the site accent to gold (used by focus rings, etc.) */
+  const setGoldTheme = useCallback(() => {
+    if (typeof document !== "undefined") {
+      document.documentElement.style.setProperty("--ilf-accent", "#B8892D");
+    }
+  }, []);
+
   /* Shared utility classes */
   const labelFloating =
     "pointer-events-none absolute left-4 transition-all text-sm font-medium text-gray-600 " +
     "peer-placeholder-shown:top-3 peer-placeholder-shown:text-base " +
-    "peer-focus:-top-5 peer-focus:text-xs peer-focus:text-indigo-600 " +
-    "peer-[&:not(:placeholder-shown)]:-top-5 peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:text-indigo-600";
+    "peer-focus:-top-5 peer-focus:text-xs " +
+    "peer-[&:not(:placeholder-shown)]:-top-5 peer-[&:not(:placeholder-shown)]:text-xs " +
+    "peer-focus:text-[var(--ilf-accent)] peer-[&:not(:placeholder-shown)]:text-[var(--ilf-accent)]";
 
   const inputBase =
-    "peer w-full rounded-lg bg-white/70 px-4 py-3 text-gray-900 shadow-inner backdrop-blur-sm " +
-    "focus:ring-2 focus:ring-indigo-400 placeholder-transparent";
+    "peer w-full rounded-lg bg-white px-4 py-3 text-gray-900 placeholder-transparent " +
+    "border border-gray-300 shadow-sm backdrop-blur " + // ⬅️ clearer field outline + darker shadow
+    "transition focus:outline-none focus:ring-2 " +
+    "focus:ring-[var(--ilf-accent)] focus:border-[var(--ilf-accent)]";
 
   return (
     <section id="contact" className="relative bg-gray-50 pt-20 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-64" />
 
       <div className="relative mx-auto w-full max-w-5xl">
-        <h2 className="mb-12 text-center text-4xl font-extrabold tracking-tight text-gray-900 md:text-5xl">
-          Let&apos;s Talk Bulk Furniture for Your Next Project
+        {/* Hero copy */}
+        <h2 className="mb-3 text-center text-4xl font-extrabold tracking-tight text-gray-900 md:text-5xl">
+          Didn’t find exactly what you’re looking for?
         </h2>
+        <p className="mx-auto mb-12 max-w-2xl text-center text-lg text-gray-600">
+          ILF is a full-scale factory for custom-built furniture—tailored to your space, style,
+          and budget. Share a few details and our team will reach out{" "}
+          <span className="font-medium">within the hour</span>.
+        </p>
 
         <form
           ref={formRef}
           onSubmit={sendEmail}
-          className="space-y-10 rounded-3xl border border-gray-200 bg-white/90 p-12 shadow-2xl backdrop-blur"
+          className="space-y-10 rounded-3xl border border-gray-300 bg-white/95 p-12 shadow-2xl backdrop-blur"
         >
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
             {/* Name */}
@@ -64,6 +80,7 @@ export default function ContactSection() {
                 name="user_name"
                 placeholder=" "
                 required
+                onFocus={setGoldTheme}
                 className={inputBase}
               />
               <label htmlFor="name" className={labelFloating}>
@@ -79,6 +96,7 @@ export default function ContactSection() {
                 name="user_email"
                 placeholder=" "
                 required
+                onFocus={setGoldTheme}
                 className={inputBase}
               />
               <label htmlFor="email" className={labelFloating}>
@@ -94,6 +112,7 @@ export default function ContactSection() {
                 name="company"
                 placeholder=" "
                 required
+                onFocus={setGoldTheme}
                 className={inputBase}
               />
               <label htmlFor="company" className={labelFloating}>
@@ -109,6 +128,7 @@ export default function ContactSection() {
               name="message"
               placeholder=" "
               required
+              onFocus={setGoldTheme}
               className={inputBase + " min-h-[10rem] resize-y leading-relaxed"}
             />
             <label htmlFor="details" className={labelFloating}>
@@ -123,7 +143,8 @@ export default function ContactSection() {
               className="inline-flex items-center justify-center gap-2 rounded-xl
 bg-gradient-to-r from-[#B8892D] to-[#E4C86E]
 px-8 py-2 text-lg font-semibold text-white shadow-lg transition
-hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70"
+hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--ilf-accent)]
+disabled:cursor-not-allowed disabled:opacity-70"
             >
               {sending ? "Sending…" : "Send Message"}
             </button>

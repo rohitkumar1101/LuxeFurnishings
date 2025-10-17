@@ -36,7 +36,7 @@ export default async function CategoriesPage() {
   });
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-12">
+    <main className="mx-auto px-4 py-12 relative bg-gray-50 pt-20 pb-20 px-4 sm:px-6 lg:px-8">
       <h1 className="mb-8 text-center text-3xl font-bold md:text-4xl">Categories</h1>
 
       {categories.length === 0 ? (
