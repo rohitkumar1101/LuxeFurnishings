@@ -47,7 +47,7 @@ export default function ContactSection() {
 
   const inputBase =
     "peer w-full rounded-lg bg-white px-4 py-3 text-gray-900 placeholder-transparent " +
-    "border border-gray-300 shadow-sm backdrop-blur " + // ⬅️ clearer field outline + darker shadow
+    "border border-gray-300 shadow-sm backdrop-blur " +
     "transition focus:outline-none focus:ring-2 " +
     "focus:ring-[var(--ilf-accent)] focus:border-[var(--ilf-accent)]";
 
@@ -55,7 +55,7 @@ export default function ContactSection() {
     <section id="contact" className="relative bg-gray-50 pt-20 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-64" />
 
-      <div className="relative mx-auto w-full max-w-5xl">
+      <div className="relative mx-auto w-full max-w-2xl">
         {/* Hero copy */}
         <h2 className="mb-3 text-center text-4xl font-extrabold tracking-tight text-gray-900 md:text-5xl">
           Didn’t find exactly what you’re looking for?
@@ -82,57 +82,46 @@ export default function ContactSection() {
                 required
                 onFocus={setGoldTheme}
                 className={inputBase}
+                autoComplete="name"
               />
               <label htmlFor="name" className={labelFloating}>
                 Name
               </label>
             </div>
 
-            {/* Email */}
+            {/* Phone Number */}
             <div className="relative">
               <input
-                id="email"
-                type="email"
-                name="user_email"
+                id="phone"
+                type="tel"
+                name="user_phone"
                 placeholder=" "
                 required
                 onFocus={setGoldTheme}
                 className={inputBase}
+                inputMode="tel"
+                autoComplete="tel"
+                pattern="^[0-9()+\-.\s]{7,20}$"
+                title="Enter a valid phone number"
               />
-              <label htmlFor="email" className={labelFloating}>
-                Email
-              </label>
-            </div>
-
-            {/* Company */}
-            <div className="relative sm:col-span-2">
-              <input
-                id="company"
-                type="text"
-                name="company"
-                placeholder=" "
-                required
-                onFocus={setGoldTheme}
-                className={inputBase}
-              />
-              <label htmlFor="company" className={labelFloating}>
-                Company
+              <label htmlFor="phone" className={labelFloating}>
+                Phone Number (India)
               </label>
             </div>
           </div>
 
-          {/* Project details */}
+          {/* Requirements */}
           <div className="relative">
             <textarea
-              id="details"
-              name="message"
+              id="requirements"
+              name="message" /* EmailJS default */
               placeholder=" "
               required
               onFocus={setGoldTheme}
               className={inputBase + " min-h-[10rem] resize-y leading-relaxed"}
             />
-            <label htmlFor="details" className={labelFloating}>
-              Project Details
+            <label htmlFor="requirements" className={labelFloating}>
+              Requirements
             </label>
           </div>
 
