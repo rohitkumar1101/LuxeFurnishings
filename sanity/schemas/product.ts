@@ -71,6 +71,13 @@ export default defineType({
         of: [{type: 'file'}],
       },
   
+      {
+        name: 'interiors',
+        title: 'Interiors',
+        type: 'array',
+        of: [{ type: 'reference', to: [{ type: 'interior' }] }],
+      },
+
       /*  Flags  */
       {name: 'isFeatured', title: 'Featured', type: 'boolean', initialValue: false},
     ],

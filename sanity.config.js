@@ -7,6 +7,7 @@
 import {visionTool} from '@sanity/vision'
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
+import {media, mediaAssetSource} from 'sanity-plugin-media'
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import {apiVersion, dataset, projectId} from './sanity/env'
@@ -15,6 +16,7 @@ import {structure} from './sanity/structure'
 
 import product from './sanity/schemas/product'
 import category from './sanity/schemas/category'
+import interior from './sanity/schemas/interior'
 import productType from './sanity/schemas/productType'
 import material from './sanity/schemas/material'
 import productVariant from './sanity/schemas/productVariant'
@@ -28,6 +30,7 @@ export default defineConfig({
     types: [
       product,
       category,
+      interior,
       productType,
       material,
       productVariant,
@@ -35,8 +38,12 @@ export default defineConfig({
   },
   plugins: [
     structureTool({structure}),
-    // Vision is for querying with GROQ from inside the Studio
-    // https://www.sanity.io/docs/the-vision-plugin
     visionTool({defaultApiVersion: apiVersion}),
+    media(),
   ],
+  form: {
+    image: {
+      assetSources: previousAssetSources => [...previousAssetSources, mediaAssetSource],
+    },
+  },
 })

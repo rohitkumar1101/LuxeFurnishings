@@ -47,7 +47,7 @@ export default function HeroSection() {
       {/* Copy + CTAs */}
       <div className="relative z-10 flex h-full w-full flex-col items-center justify-center px-6 text-center text-white">
         <h1 className="mb-4 text-3xl font-bold md:text-5xl">
-          Luxury Furniture. Factory-Made. Delivered On Time
+          Get Interiors and Furniture Built Directly From the Factory
         </h1>
         <p className="mb-8 max-w-2xl text-lg md:text-2xl">
           High end comfort & factory direct prices for your homes and offices.
